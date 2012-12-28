@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="llisdbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="llisdbModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="llisdbModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserAccountOperations" EntityType="llisdbModel.Store.UserAccountOperations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserAccounts" EntityType="llisdbModel.Store.UserAccounts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserDepartmentOperations" EntityType="llisdbModel.Store.UserDepartmentOperations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserDepartments" EntityType="llisdbModel.Store.UserDepartments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserAccountsView" EntityType="llisdbModel.Store.UserAccountsView" store:Type="Views" store:Schema="dbo" store:Name="UserAccountsView">
+            <DefiningQuery>SELECT 
+      [UserAccountsView].[Id] AS [Id], 
+      [UserAccountsView].[CreatedById] AS [CreatedById], 
+      [UserAccountsView].[CreatedDate] AS [CreatedDate], 
+      [UserAccountsView].[OperationsId] AS [OperationsId], 
+      [UserAccountsView].[UserName] AS [UserName], 
+      [UserAccountsView].[Address] AS [Address], 
+      [UserAccountsView].[Action] AS [Action], 
+      [UserAccountsView].[UpdatedById] AS [UpdatedById], 
+      [UserAccountsView].[UpdatedDate] AS [UpdatedDate]
+      FROM [dbo].[UserAccountsView] AS [UserAccountsView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserDepartmentsView" EntityType="llisdbModel.Store.UserDepartmentsView" store:Type="Views" store:Schema="dbo" store:Name="UserDepartmentsView">
+            <DefiningQuery>SELECT 
+      [UserDepartmentsView].[Id] AS [Id], 
+      [UserDepartmentsView].[CreatedById] AS [CreatedById], 
+      [UserDepartmentsView].[CreatedDate] AS [CreatedDate], 
+      [UserDepartmentsView].[Expr1] AS [Expr1], 
+      [UserDepartmentsView].[UserAccountId] AS [UserAccountId], 
+      [UserDepartmentsView].[Department] AS [Department], 
+      [UserDepartmentsView].[Designation] AS [Designation], 
+      [UserDepartmentsView].[Action] AS [Action], 
+      [UserDepartmentsView].[UpdatedById] AS [UpdatedById]
+      FROM [dbo].[UserDepartmentsView] AS [UserDepartmentsView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_UserAccountOperations_UserAccounts" Association="llisdbModel.Store.FK_UserAccountOperations_UserAccounts">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="UserAccountOperations" EntitySet="UserAccountOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDepartmentOperations_UserAccounts" Association="llisdbModel.Store.FK_UserDepartmentOperations_UserAccounts">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="UserDepartmentOperations" EntitySet="UserDepartmentOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDepartmentOperations_UserDepartments" Association="llisdbModel.Store.FK_UserDepartmentOperations_UserDepartments">
+            <End Role="UserDepartments" EntitySet="UserDepartments" />
+            <End Role="UserDepartmentOperations" EntitySet="UserDepartmentOperations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserAccountOperations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserAccountId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Action" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="UpdatedById" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedById" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDepartmentOperations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserDepartmentId" Type="int" Nullable="false" />
+          <Property Name="UserAccountId" Type="int" Nullable="false" />
+          <Property Name="Department" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Designation" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Action" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="UpdatedById" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDepartments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedById" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'llisdb.dbo.UserAccountsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="UserAccountsView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CreatedById" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="OperationsId" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="Action" />
+            <PropertyRef Name="UpdatedById" />
+            <PropertyRef Name="UpdatedDate" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CreatedById" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="OperationsId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Action" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="UpdatedById" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'llisdb.dbo.UserDepartmentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="UserDepartmentsView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CreatedById" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="UserAccountId" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Designation" />
+            <PropertyRef Name="Action" />
+            <PropertyRef Name="UpdatedById" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CreatedById" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Expr1" Type="int" Nullable="false" />
+          <Property Name="UserAccountId" Type="int" Nullable="false" />
+          <Property Name="Department" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Designation" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Action" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="UpdatedById" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_UserAccountOperations_UserAccounts">
+          <End Role="UserAccounts" Type="llisdbModel.Store.UserAccounts" Multiplicity="1" />
+          <End Role="UserAccountOperations" Type="llisdbModel.Store.UserAccountOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAccountOperations">
+              <PropertyRef Name="UserAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDepartmentOperations_UserAccounts">
+          <End Role="UserAccounts" Type="llisdbModel.Store.UserAccounts" Multiplicity="1" />
+          <End Role="UserDepartmentOperations" Type="llisdbModel.Store.UserDepartmentOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDepartmentOperations">
+              <PropertyRef Name="UserAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDepartmentOperations_UserDepartments">
+          <End Role="UserDepartments" Type="llisdbModel.Store.UserDepartments" Multiplicity="1" />
+          <End Role="UserDepartmentOperations" Type="llisdbModel.Store.UserDepartmentOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDepartments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDepartmentOperations">
+              <PropertyRef Name="UserDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="llisdbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="llisdb" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="llisdbModel.sysdiagram" />
+          <EntitySet Name="UserAccountOperations" EntityType="llisdbModel.UserAccountOperation" />
+          <EntitySet Name="UserAccounts" EntityType="llisdbModel.UserAccount" />
+          <EntitySet Name="UserDepartmentOperations" EntityType="llisdbModel.UserDepartmentOperation" />
+          <EntitySet Name="UserDepartments" EntityType="llisdbModel.UserDepartment" />
+          <EntitySet Name="UserAccountsViews" EntityType="llisdbModel.UserAccountsView" />
+          <EntitySet Name="UserDepartmentsViews" EntityType="llisdbModel.UserDepartmentsView" />
+          <AssociationSet Name="FK_UserAccountOperations_UserAccounts" Association="llisdbModel.FK_UserAccountOperations_UserAccounts">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="UserAccountOperations" EntitySet="UserAccountOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDepartmentOperations_UserAccounts" Association="llisdbModel.FK_UserDepartmentOperations_UserAccounts">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="UserDepartmentOperations" EntitySet="UserDepartmentOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDepartmentOperations_UserDepartments" Association="llisdbModel.FK_UserDepartmentOperations_UserDepartments">
+            <End Role="UserDepartments" EntitySet="UserDepartments" />
+            <End Role="UserDepartmentOperations" EntitySet="UserDepartmentOperations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserAccountOperation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserAccountId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="UpdatedById" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserAccount" Relationship="llisdbModel.FK_UserAccountOperations_UserAccounts" FromRole="UserAccountOperations" ToRole="UserAccounts" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedById" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserAccountOperations" Relationship="llisdbModel.FK_UserAccountOperations_UserAccounts" FromRole="UserAccounts" ToRole="UserAccountOperations" />
+          <NavigationProperty Name="UserDepartmentOperations" Relationship="llisdbModel.FK_UserDepartmentOperations_UserAccounts" FromRole="UserAccounts" ToRole="UserDepartmentOperations" />
+        </EntityType>
+        <EntityType Name="UserDepartmentOperation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserDepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="UserAccountId" Type="Int32" Nullable="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Designation" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="UpdatedById" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserAccount" Relationship="llisdbModel.FK_UserDepartmentOperations_UserAccounts" FromRole="UserDepartmentOperations" ToRole="UserAccounts" />
+          <NavigationProperty Name="UserDepartment" Relationship="llisdbModel.FK_UserDepartmentOperations_UserDepartments" FromRole="UserDepartmentOperations" ToRole="UserDepartments" />
+        </EntityType>
+        <EntityType Name="UserDepartment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedById" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserDepartmentOperations" Relationship="llisdbModel.FK_UserDepartmentOperations_UserDepartments" FromRole="UserDepartments" ToRole="UserDepartmentOperations" />
+        </EntityType>
+        <EntityType Name="UserAccountsView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CreatedById" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="OperationsId" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="Action" />
+            <PropertyRef Name="UpdatedById" />
+            <PropertyRef Name="UpdatedDate" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedById" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OperationsId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="UpdatedById" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserDepartmentsView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CreatedById" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="UserAccountId" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Designation" />
+            <PropertyRef Name="Action" />
+            <PropertyRef Name="UpdatedById" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedById" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Expr1" Type="Int32" Nullable="false" />
+          <Property Name="UserAccountId" Type="Int32" Nullable="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Designation" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="UpdatedById" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_UserAccountOperations_UserAccounts">
+          <End Role="UserAccounts" Type="llisdbModel.UserAccount" Multiplicity="1" />
+          <End Role="UserAccountOperations" Type="llisdbModel.UserAccountOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAccountOperations">
+              <PropertyRef Name="UserAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDepartmentOperations_UserAccounts">
+          <End Role="UserAccounts" Type="llisdbModel.UserAccount" Multiplicity="1" />
+          <End Role="UserDepartmentOperations" Type="llisdbModel.UserDepartmentOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDepartmentOperations">
+              <PropertyRef Name="UserAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDepartmentOperations_UserDepartments">
+          <End Role="UserDepartments" Type="llisdbModel.UserDepartment" Multiplicity="1" />
+          <End Role="UserDepartmentOperations" Type="llisdbModel.UserDepartmentOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDepartments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDepartmentOperations">
+              <PropertyRef Name="UserDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="llisdbModelStoreContainer" CdmEntityContainer="llisdb">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="llisdbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccountOperations">
+            <EntityTypeMapping TypeName="llisdbModel.UserAccountOperation">
+              <MappingFragment StoreEntitySet="UserAccountOperations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccounts">
+            <EntityTypeMapping TypeName="llisdbModel.UserAccount">
+              <MappingFragment StoreEntitySet="UserAccounts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDepartmentOperations">
+            <EntityTypeMapping TypeName="llisdbModel.UserDepartmentOperation">
+              <MappingFragment StoreEntitySet="UserDepartmentOperations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserDepartmentId" ColumnName="UserDepartmentId" />
+                <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDepartments">
+            <EntityTypeMapping TypeName="llisdbModel.UserDepartment">
+              <MappingFragment StoreEntitySet="UserDepartments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccountsViews">
+            <EntityTypeMapping TypeName="llisdbModel.UserAccountsView">
+              <MappingFragment StoreEntitySet="UserAccountsView">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="OperationsId" ColumnName="OperationsId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDepartmentsViews">
+            <EntityTypeMapping TypeName="llisdbModel.UserDepartmentsView">
+              <MappingFragment StoreEntitySet="UserDepartmentsView">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

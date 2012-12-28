@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b398a8e38c1f4645b2ac48b8c0be2924" Name="Diagram1">
+        <EntityTypeShape EntityType="llisdbModel.UserAccountOperation" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="llisdbModel.UserAccount" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="llisdbModel.UserDepartmentOperation" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="llisdbModel.UserDepartment" Width="2.25" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="llisdbModel.UserAccountsView" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="llisdbModel.UserDepartmentsView" Width="1.5" PointX="4.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="llisdbModel.FK_UserAccountOperations_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="llisdbModel.FK_UserDepartmentOperations_UserAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="llisdbModel.FK_UserDepartmentOperations_UserDepartments" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
